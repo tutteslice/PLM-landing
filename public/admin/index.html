@@ -16,7 +16,7 @@
     .card { background: rgba(255,255,255,.05); border:1px solid rgba(255,255,255,.1); border-radius:12px; padding:1rem; margin-bottom:1rem; }
   </style>
   <script>
-    const API_BASE = '/.netlify/functions';
+    const API_BASE = '/api';
     function getToken(){ return localStorage.getItem('adminToken') || ''; }
     function setToken(t){ localStorage.setItem('adminToken', t); }
     function getProvider(){

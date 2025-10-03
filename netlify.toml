@@ -1,19 +1,20 @@
-## Netlify configuration
-[build]
-  publish = "public"
-  functions = "netlify/functions"
+# Netlify configuration (ARCHIVE)
+# This project has been migrated to Cloudflare Pages. The original Netlify configuration
+# is kept here for reference. Remove this file if you no longer need Netlify settings.
 
-[functions]
-  # Ensure these modules are available at runtime
-  external_node_modules = ["pg", "dotenv"]
-  node_bundler = "esbuild"
-
-# Per‑function overrides
-[functions."news-generate"]
-  # Per-function override (seconds)
-  timeout = 90
-
-[dev]
-  publish = "public"
-  functions = "netlify/functions"
-  functionsTimeout = 90
+# Original contents (kept as comment):
+# [build]
+#   publish = "public"
+#   functions = "netlify/functions"
+#
+# [functions]
+#   external_node_modules = ["pg", "dotenv"]
+#   node_bundler = "esbuild"
+#
+# [functions."news-generate"]
+#   timeout = 90
+#
+# [dev]
+#   publish = "public"
+#   functions = "netlify/functions"
+#   functionsTimeout = 90

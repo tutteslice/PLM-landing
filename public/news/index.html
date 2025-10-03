@@ -36,7 +36,7 @@
   </main>
   <script>
     async function load(){
-      const r = await fetch('/.netlify/functions/news');
+      const r = await fetch('/api/news');
       const posts = await r.json();
       const list = document.getElementById('list');
       list.innerHTML = '';
