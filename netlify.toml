@@ -16,3 +16,4 @@
 [dev]
   publish = "public"
   functions = "netlify/functions"
+  functionsTimeout = 90

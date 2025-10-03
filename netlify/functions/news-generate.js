@@ -2,7 +2,7 @@ require('dotenv').config();
 const OpenAI = require('openai');
 
 const HEADERS = { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' };
-const OPENAI_PROMPT = { id: 'pmpt_68dd621211e48194a9bcb0f3b88f51c40c83dce5f116999b', version: '1' };
+const OPENAI_PROMPT = { id: 'pmpt_68dd621211e48194a9bcb0f3b88f51c40c83dce5f116999b', version: '2' };
 
 function parseOpenAIText(response) {
   if (!response) return '';
@@ -58,10 +58,12 @@ exports.handler = async (event) => {
       return { statusCode: 500, headers: HEADERS, body: JSON.stringify({ error: 'OPENAI_API_KEY not set' }) };
     }
 
-    const client = new OpenAI({ apiKey });
+    const openai = new OpenAI({
+      apiKey: process.env.OPENAI_API_KEY,
+    });
     let response;
     try {
-      response = await client.responses.create({
+      response = await openai.responses.create({
         prompt: OPENAI_PROMPT,
         input: [
           {
