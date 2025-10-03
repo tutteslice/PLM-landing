@@ -7,7 +7,7 @@ const HEADERS = {
   'Access-Control-Allow-Methods': 'POST,OPTIONS'
 };
 const OPENAI_PROMPT = { id: 'pmpt_68dd621211e48194a9bcb0f3b88f51c40c83dce5f116999b', version: '2' };
-const GEMINI_MODEL = 'gemini-1.5-flash';
+const GEMINI_MODEL = 'gemini-2.5-flash';
 
 function parseOpenAIText(response) {
   if (!response) return '';
@@ -151,17 +151,30 @@ async function generateWithGemini(topic, env) {
           role: 'user',
           parts: [{ text: prompt }]
         }
-      ]
+      ],
+      generationConfig: {
+        temperature: 0.7,
+        maxOutputTokens: 2048
+      }
     };
 
     const response = await fetch(url, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(payload)
+      body: JSON.stringify(payload),
+      signal: AbortSignal.timeout(25000) // 25s timeout (Cloudflare has 30s limit)
     });
 
-    const data = await response.json().catch(() => ({}));
+    const data = await response.json().catch((err) => {
+      console.error('Failed to parse Gemini response:', err);
+      return {};
+    });
     if (!response.ok) {
+      console.error('Gemini API error:', {
+        status: response.status,
+        statusText: response.statusText,
+        data
+      });
       const message = data?.error?.message || `Gemini request failed (${response.status})`;
       return { status: 502, body: { error: message } };
     }
