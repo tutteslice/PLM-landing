@@ -1,5 +1,4 @@
 import OpenAI from 'openai';
-import { GoogleGenerativeAI } from '@google/generative-ai';
 
 const HEADERS = {
   'Content-Type': 'application/json',
@@ -142,18 +141,43 @@ async function generateWithGemini(topic, env) {
   }
 
   try {
-    const genAI = new GoogleGenerativeAI(apiKey);
-    const model = genAI.getGenerativeModel({ model: GEMINI_MODEL });
     const prompt = `Du är en svensk journalist. Skriv en engagerande nyhetsartikel om "${topic}". ` +
       'Inled med en rubrik på en rad och följ med 3–5 stycken brödtext. Inkludera fakta, citat och sammanhang.';
-    const result = await model.generateContent([{
-      role: 'user',
-      parts: [{ text: prompt }]
-    }]);
 
-    const text = result?.response?.text?.() || '';
-    if (!text.trim()) {
-      console.error('Gemini returned empty content');
+    const url = `https://generativelanguage.googleapis.com/v1beta/models/${encodeURIComponent(GEMINI_MODEL)}:generateContent?key=${apiKey}`;
+    const payload = {
+      contents: [
+        {
+          role: 'user',
+          parts: [{ text: prompt }]
+        }
+      ]
+    };
+
+    const response = await fetch(url, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    });
+
+    const data = await response.json().catch(() => ({}));
+    if (!response.ok) {
+      const message = data?.error?.message || `Gemini request failed (${response.status})`;
+      return { status: 502, body: { error: message } };
+    }
+
+    const candidates = Array.isArray(data?.candidates) ? data.candidates : [];
+    const segments = [];
+    for (const candidate of candidates) {
+      for (const part of candidate?.content?.parts || []) {
+        if (typeof part.text === 'string' && part.text.trim()) {
+          segments.push(part.text.trim());
+        }
+      }
+    }
+    const text = segments.join('\n').trim();
+    if (!text) {
+      console.error('Gemini response missing text payload', data);
       return { status: 502, body: { error: 'Ingen text genererades av Gemini' } };
     }
 
