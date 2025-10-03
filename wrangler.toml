@@ -3,14 +3,4 @@ compatibility_date = "2025-10-03"
 pages_build_output_dir = "./public"
 compatibility_flags = ["nodejs_compat"]
 
-# Set your account_id and project settings before deploying
-account_id = "d72cbd845696d9519c7eaeb7146cb1d7"
-
-[build]
-  command = ""
-
-[env.production]
-  # production-specific overrides
-  
-# Note: fill in `account_id` and optionally configure `project`/build settings.
-# Use `wrangler pages dev ./public` locally and `wrangler pages publish ./public --project-name plm-landing` to deploy.
+# Deploy with `wrangler pages deploy ./public --project-name plm-landing --branch main`.

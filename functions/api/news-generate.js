@@ -1,4 +1,5 @@
 import OpenAI from 'openai';
+import { GoogleGenerativeAI } from '@google/generative-ai';
 
 const HEADERS = {
   'Content-Type': 'application/json',
@@ -7,6 +8,7 @@ const HEADERS = {
   'Access-Control-Allow-Methods': 'POST,OPTIONS'
 };
 const OPENAI_PROMPT = { id: 'pmpt_68dd621211e48194a9bcb0f3b88f51c40c83dce5f116999b', version: '2' };
+const GEMINI_MODEL = 'gemini-1.5-flash';
 
 function parseOpenAIText(response) {
   if (!response) return '';
@@ -58,59 +60,65 @@ export async function onRequest(context) {
   try {
     const body = await request.json().catch(() => ({}));
     const topic = body.topic;
+    const provider = String(body.provider || 'gemini').toLowerCase();
     if (!topic) {
       return new Response(JSON.stringify({ error: 'Missing topic' }), { status: 400, headers: HEADERS });
     }
+    const result = provider === 'openai'
+      ? await generateWithOpenAI(topic, env)
+      : await generateWithGemini(topic, env);
 
-    const apiKey = env.OPENAI_API_KEY;
-    if (!apiKey) {
-      return new Response(JSON.stringify({ error: 'OPENAI_API_KEY not set' }), { status: 500, headers: HEADERS });
-    }
+    return new Response(JSON.stringify(result.body), { status: result.status, headers: HEADERS });
+  } catch (e) {
+    console.error(e);
+    return new Response(JSON.stringify({ error: 'Generation failed' }), { status: 500, headers: HEADERS });
+  }
+}
 
-    const openai = new OpenAI({ apiKey });
-    let response;
-    try {
-      response = await openai.responses.create({
-        prompt: OPENAI_PROMPT,
-        input: [
-          {
-            role: 'user',
-            content: [
-              { type: 'input_text', text: String(topic).trim() }
-            ]
-          }
-        ],
-        reasoning: { summary: 'auto' },
-        tools: [
-          {
-            type: 'web_search',
-            filters: null,
-            search_context_size: 'high',
-            user_location: { type: 'approximate', city: 'stockholm', country: 'SE', region: null, timezone: null }
-          },
-          {
-            type: 'image_generation',
-            background: 'auto',
-            moderation: 'low',
-            output_compression: 100,
-            output_format: 'png',
-            quality: 'auto',
-            size: '1536x1024'
-          }
-        ],
-        store: true,
-        include: ['reasoning.encrypted_content', 'web_search_call.action.sources']
-      });
-    } catch (error) {
-      console.error('OpenAI article generation failed:', error);
-      const message = error?.error?.message || error?.message || 'OpenAI request failed';
-      return new Response(JSON.stringify({ error: message }), { status: 502, headers: HEADERS });
-    }
+async function generateWithOpenAI(topic, env) {
+  const apiKey = env.OPENAI_API_KEY;
+  if (!apiKey) {
+    return { status: 500, body: { error: 'OPENAI_API_KEY not set' } };
+  }
+
+  const openai = new OpenAI({ apiKey });
+  try {
+    const response = await openai.responses.create({
+      prompt: OPENAI_PROMPT,
+      input: [
+        {
+          role: 'user',
+          content: [
+            { type: 'input_text', text: String(topic).trim() }
+          ]
+        }
+      ],
+      reasoning: { summary: 'auto' },
+      tools: [
+        {
+          type: 'web_search',
+          filters: null,
+          search_context_size: 'high',
+          user_location: { type: 'approximate', city: 'stockholm', country: 'SE', region: null, timezone: null }
+        },
+        {
+          type: 'image_generation',
+          background: 'auto',
+          moderation: 'low',
+          output_compression: 100,
+          output_format: 'png',
+          quality: 'auto',
+          size: '1536x1024'
+        }
+      ],
+      store: true,
+      include: ['reasoning.encrypted_content', 'web_search_call.action.sources']
+    });
 
     const text = parseOpenAIText(response);
     if (!text) {
       console.error('OpenAI custom prompt returned no text');
-      return new Response(JSON.stringify({ error: 'Ingen text genererades av OpenAI' }), { status: 502, headers: HEADERS });
+      return { status: 502, body: { error: 'Ingen text genererades av OpenAI' } };
     }
 
     const lines = text.split('\n');
@@ -119,9 +127,45 @@ export async function onRequest(context) {
     const content = lines.join('\n').trim() || firstLine.trim();
     const sources = parseOpenAISources(response);
 
-    return new Response(JSON.stringify({ title, content, sources }), { status: 200, headers: HEADERS });
-  } catch (e) {
-    console.error(e);
-    return new Response(JSON.stringify({ error: 'Generation failed' }), { status: 500, headers: HEADERS });
+    return { status: 200, body: { title, content, sources } };
+  } catch (error) {
+    console.error('OpenAI article generation failed:', error);
+    const message = error?.error?.message || error?.message || 'OpenAI request failed';
+    return { status: 502, body: { error: message } };
+  }
+}
+
+async function generateWithGemini(topic, env) {
+  const apiKey = env.GEMINI_API_KEY;
+  if (!apiKey) {
+    return { status: 500, body: { error: 'GEMINI_API_KEY not set' } };
+  }
+
+  try {
+    const genAI = new GoogleGenerativeAI(apiKey);
+    const model = genAI.getGenerativeModel({ model: GEMINI_MODEL });
+    const prompt = `Du är en svensk journalist. Skriv en engagerande nyhetsartikel om "${topic}". ` +
+      'Inled med en rubrik på en rad och följ med 3–5 stycken brödtext. Inkludera fakta, citat och sammanhang.';
+    const result = await model.generateContent([{
+      role: 'user',
+      parts: [{ text: prompt }]
+    }]);
+
+    const text = result?.response?.text?.() || '';
+    if (!text.trim()) {
+      console.error('Gemini returned empty content');
+      return { status: 502, body: { error: 'Ingen text genererades av Gemini' } };
+    }
+
+    const lines = text.split('\n');
+    const firstLine = lines.shift() || '';
+    const title = firstLine.replace(/^\s*#+\s*/, '').trim().slice(0, 160);
+    const content = lines.join('\n').trim() || firstLine.trim();
+
+    return { status: 200, body: { title, content, sources: [] } };
+  } catch (error) {
+    console.error('Gemini article generation failed:', error);
+    const message = error?.message || 'Gemini request failed';
+    return { status: 502, body: { error: message } };
   }
 }
