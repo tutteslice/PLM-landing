@@ -1,4 +1,14 @@
-const { Client } = require('pg');
+require('dotenv').config()
+console.log(process.env) 
+const { Pool } = require('pg')
+
+const pool = new Pool({
+  connectionString: process.env.NEON_DATABASE_URL,
+  ssl: {
+    rejectUnauthorized: true,
+    mode: 'require'
+  }
+})
 
 exports.handler = async (event, context) => {
   // Only allow POST requests
@@ -21,14 +31,7 @@ exports.handler = async (event, context) => {
     }
 
     // Connect to Neon database
-    const client = new Client({
-      connectionString: process.env.NEON_DATABASE_URL,
-      ssl: {
-        rejectUnauthorized: false
-      }
-    });
-
-    await client.connect();
+    const client = await pool.connect();
 
     // Insert email (with conflict handling)
     const result = await client.query(
@@ -39,7 +42,7 @@ exports.handler = async (event, context) => {
       [email]
     );
 
-    await client.end();
+    client.release();
 
     return {
       statusCode: 200,

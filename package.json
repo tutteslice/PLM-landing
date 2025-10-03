@@ -1,5 +1,14 @@
 {
+  "name": "plm-site",
+  "private": true,
+  "version": "0.1.0",
+  "description": "Private Lives Matter static site + Netlify Functions",
+  "scripts": {
+    "dev": "netlify dev",
+    "deploy": "netlify deploy"
+  },
+  "packageManager": "yarn@1.22.22+sha512.a6b2f7906b721bba3d67d4aff083df04dad64c399707841b7acf00f6b133b7ac24255f2652fa22ae3534329dc6180534e98d17432037ff6fd140556e2bb3137e",
   "dependencies": {
-    "pg": "^8.11.0"
+    "@google/generative-ai": "^0.24.1"
   }
 }

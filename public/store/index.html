@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Butik – Private Lives Matter</title>
+  <style>
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Inter', sans-serif; margin:0; background:#0f1222; color:#fff; }
+    header { position: sticky; top:0; background: rgba(26,26,46,.95); padding: 1rem 0; border-bottom:1px solid rgba(255,255,255,.1); }
+    .container { max-width: 1000px; margin: 0 auto; padding: 0 20px; }
+    nav { display:flex; justify-content:space-between; align-items:center; }
+    a.logo { color:#e94560; text-decoration:none; font-weight:700; }
+    ul { list-style:none; display:flex; gap:1.25rem; margin:0; padding:0; }
+    nav a { color:#fff; text-decoration:none; }
+    main { padding: 2rem 0; }
+    .grid { display:grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem; }
+    .card { background: rgba(255,255,255,.05); border:1px solid rgba(255,255,255,.1); border-radius:12px; padding:1.25rem; }
+    .price { color:#e94560; font-weight:700; }
+    .btn { background:#e94560; color:#fff; display:inline-block; padding:.6rem 1rem; border-radius:8px; text-decoration:none; }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container">
+      <nav>
+        <a class="logo" href="/">Private Lives Matter</a>
+        <ul>
+          <li><a href="/">Hem</a></li>
+          <li><a href="/store/">Butik</a></li>
+          <li><a href="/news/">Nyheter</a></li>
+          <li><a href="/index.html#newsletter">Nyhetsbrev</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+  <main class="container">
+    <h1>Butik</h1>
+    <p>Platshållare för produkter. Integrera valfri checkout (t.ex. Stripe Checkout) senare.</p>
+
+    <section class="grid">
+      <div class="card">
+        <h2>Exempelprodukt</h2>
+        <p>Kort beskrivning av produkten.</p>
+        <p class="price">299 kr</p>
+        <a class="btn" href="#">Köp</a>
+      </div>
+    </section>
+  </main>
+</body>
+</html>

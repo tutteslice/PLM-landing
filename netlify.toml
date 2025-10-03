@@ -1,0 +1,18 @@
+## Netlify configuration
+[build]
+  publish = "public"
+  functions = "netlify/functions"
+
+[functions]
+  # Ensure these modules are available at runtime
+  external_node_modules = ["pg", "dotenv"]
+  node_bundler = "esbuild"
+
+# Per‑function overrides
+[functions."news-generate"]
+  # Per-function override (seconds)
+  timeout = 90
+
+[dev]
+  publish = "public"
+  functions = "netlify/functions"

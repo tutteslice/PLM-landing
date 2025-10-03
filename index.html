@@ -355,7 +355,7 @@
             <div class="hero-content">
                 <h1>Private Lives Matter</h1>
                 <p class="subtitle">Försvara dina digitala rättigheter och yttrandefrihet i en tid av ökande övervakning</p>
-                <a href="#information" class="cta-button">Läs mer</a>
+                <a href="/news/" class="cta-button">Nyheter</a>
             </div>
         </div>
     </section>
@@ -481,6 +481,9 @@
     </footer>
 
     <script>
+
+        require('dotenv').config()
+        console.log(process.env) 
         // Smooth scrolling for navigation links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
@@ -504,7 +507,7 @@
             alert('Vänligen ange en giltig e-postadress.');
             return;
         }
-        
+
         try {
             const response = await fetch('/.netlify/functions/subscribe', {
                 method: 'POST',
@@ -513,13 +516,13 @@
                 },
                 body: JSON.stringify({ email })
             });
-            
+
             const data = await response.json();
-            
+
             if (response.ok) {
                 successMessage.style.display = 'block';
                 document.getElementById('emailInput').value = '';
-                
+
                 setTimeout(() => {
                     successMessage.style.display = 'none';
                 }, 5000);
