@@ -1,57 +1,55 @@
 # Implementation Plan
 
-- [ ] 1. Create utility functions for input validation and error handling
-  - Write input validation function that sanitizes topics and checks length constraints
-  - Create standardized error response function with error types and user-friendly messages
-  - Add environment variable validation function to check required API keys
-  - Write unit tests for validation and error handling utilities
+- [x] 1. Enhance input validation and error handling
+  - Add comprehensive topic validation (length 1-200 chars, sanitization)
+  - Implement standardized error response function with specific error codes
+  - Add proper validation for special characters and HTML in topics
   - _Requirements: 1.3, 5.1, 5.2, 5.3_
 
-- [ ] 2. Implement retry logic and network resilience
+- [x] 2. Implement retry logic and network resilience
   - Create retry wrapper function with exponential backoff for API calls
-  - Update source fetching to use retry logic and handle timeouts gracefully
-  - Increase source fetch timeout from 2.5s to 5s with retry capability
-  - Add network error detection and appropriate error responses
+  - Add retry logic to Gemini API calls with proper timeout handling
+  - Implement network error detection and recovery mechanisms
   - _Requirements: 1.1, 2.4, 5.4_
 
-- [ ] 3. Enhance source processing and validation
-  - Improve HTML text extraction function to handle more website types
-  - Add source content validation to ensure minimum quality standards
-  - Implement source URL validation and duplicate domain filtering
-  - Add fallback handling when insufficient sources are found
-  - _Requirements: 2.1, 2.2, 2.3_
+- [x] 3. Add source integration for Gemini articles
+  - Integrate web search functionality to fetch credible sources for topics
+  - Add source content fetching and validation (minimum 2 sources required)
+  - Implement source URL validation and duplicate filtering
+  - Add source citations in generated content with proper formatting
+  - _Requirements: 2.1, 2.2, 2.3, 2.4_
 
-- [ ] 4. Add comprehensive logging and monitoring
-  - Create structured logging module with different log levels
-  - Add logging for generation start, API calls, errors, and completion
-  - Log performance metrics including response times and source counts
+- [x] 4. Enhance content quality and validation
+  - Improve Swedish language prompts for better article structure
+  - Add content length validation (500-700 words) and word counting
+  - Enhance title extraction to remove markdown and limit to 160 characters
+  - Add metadata to response (word count, source count, generation timestamp)
+  - _Requirements: 3.1, 3.2, 3.3, 3.4_
+
+- [ ] 5. Add comprehensive logging and monitoring
+  - Implement structured logging with different levels (info, warn, error)
+  - Add logging for generation start, API calls, source fetching, and completion
+  - Log performance metrics including response times and success rates
   - Add request tracking with unique IDs for debugging
   - _Requirements: 4.1, 4.2, 4.3, 4.4_
 
-- [ ] 5. Improve content generation and quality validation
-  - Enhance Swedish language prompts for better content quality
-  - Add content length validation (500-700 words)
-  - Improve title extraction and formatting (remove markdown, limit length)
-  - Add metadata to response including word count and generation timestamp
-  - _Requirements: 3.1, 3.2, 3.3, 3.4_
+- [ ] 6. Improve error handling and user feedback
+  - Replace generic error messages with specific, actionable error responses
+  - Add proper handling for API rate limits with retry suggestions
+  - Implement graceful degradation when some sources fail to load
+  - Add configuration validation on function startup
+  - _Requirements: 1.2, 1.3, 1.4, 5.1, 5.2_
 
-- [ ] 6. Update main news generation function with all improvements
-  - Integrate all utility functions into the main handler
-  - Replace existing error handling with new standardized approach
-  - Add input validation at the beginning of the request handler
-  - Update API call logic to use retry mechanisms
-  - _Requirements: 1.1, 1.2, 1.3, 1.4_
+- [ ] 7. Update frontend error handling and user experience
+  - Improve error message display in admin interface with specific error types
+  - Add loading states and progress indicators during article generation
+  - Handle different error scenarios with appropriate user-friendly messages
+  - Add retry functionality for recoverable errors
+  - _Requirements: 1.2, 1.3_
 
-- [ ] 7. Test error scenarios and edge cases
-  - Write tests for invalid input handling (empty, too long, special characters)
+- [ ] 8. Add comprehensive testing and validation
+  - Create test scenarios for invalid input handling
   - Test missing environment variable scenarios
   - Test API rate limiting and network failure scenarios
-  - Verify proper error messages are returned to frontend
+  - Verify proper error messages and recovery mechanisms
   - _Requirements: 5.1, 5.2, 5.3, 5.4_
-
-- [ ] 8. Update frontend error handling and user experience
-  - Improve error message display in admin interface
-  - Add loading states and better user feedback during generation
-  - Handle different error types with appropriate user messages
-  - Add retry button for recoverable errors
-  - _Requirements: 1.2, 1.3_

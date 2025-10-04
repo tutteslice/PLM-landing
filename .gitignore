@@ -1,25 +1,2 @@
-# macOS Finder metadata
-.DS_Store
-*/.DS_Store
-
-# Node dependencies
-node_modules/
-functions/node_modules/
-
-# Wrangler cache
-.wrangler/
-
-# Netlify CLI cache
-.netlify/
-
-# IDE configs
-.vscode/
-.idea/
-.codex/
-
-# Claude/Codex metadata
-.claude/
-.kiro/
-
-# Local logs
-*.log
+# Local Netlify folder
+.netlify

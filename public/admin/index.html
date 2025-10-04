@@ -17,10 +17,65 @@
   </style>
   <script>
     const API_BASE = '/api';
+    let availableLoras = [];
+    
     function getToken(){ return localStorage.getItem('adminToken') || ''; }
     function setToken(t){ localStorage.setItem('adminToken', t); }
     function getProvider(){
       return document.getElementById('provider').value;
+    }
+    
+    async function loadAvailableLoras(){
+      try {
+        const r = await fetch(`${API_BASE}/comfyui-loras`);
+        const data = await r.json();
+        availableLoras = data.loras || [];
+        updateLoraDropdowns();
+      } catch(e) {
+        console.error('Failed to load LoRAs:', e);
+        availableLoras = ['lora.safetensors']; // Fallback
+        updateLoraDropdowns();
+      }
+    }
+    
+    function updateLoraDropdowns(){
+      for(let i = 1; i <= 3; i++){
+        const select = document.getElementById(`lora${i}`);
+        if(!select) continue;
+        
+        const currentValue = select.value;
+        select.innerHTML = '<option value="">-- Ingen --</option>';
+        
+        availableLoras.forEach(lora => {
+          const option = document.createElement('option');
+          option.value = lora;
+          option.textContent = lora;
+          if(lora === currentValue) option.selected = true;
+          select.appendChild(option);
+        });
+      }
+    }
+    
+    function getSelectedLoras(){
+      const loras = [];
+      for(let i = 1; i <= 3; i++){
+        const loraName = document.getElementById(`lora${i}`).value;
+        const loraStrength = parseFloat(document.getElementById(`loraStrength${i}`).value);
+        
+        if(loraName && loraName !== ''){
+          loras.push({
+            name: loraName,
+            strength: loraStrength
+          });
+        }
+      }
+      return loras;
+    }
+    
+    function updateStrengthDisplay(slot){
+      const slider = document.getElementById(`loraStrength${slot}`);
+      const display = document.getElementById(`loraStrengthDisplay${slot}`);
+      display.textContent = slider.value;
     }
     async function genArticle(){
       const topic = document.getElementById('topic').value.trim();
@@ -35,7 +90,17 @@
     async function genImage(){
       const topic = document.getElementById('topic').value.trim();
       const provider = getProvider();
-      const r = await fetch(`${API_BASE}/image-generate`, { method:'POST', headers:{ 'Content-Type':'application/json' }, body: JSON.stringify({ topic, provider })});
+      let payload = { topic, provider };
+      
+      // Add LoRAs if ComfyUI is selected
+      if(provider === 'comfyui'){
+        const loras = getSelectedLoras();
+        if(loras.length > 0){
+          payload.loras = loras;
+        }
+      }
+      
+      const r = await fetch(`${API_BASE}/image-generate`, { method:'POST', headers:{ 'Content-Type':'application/json' }, body: JSON.stringify(payload)});
       const d = await r.json();
       document.getElementById('imageUrl').value = d.imageUrl || '';
       document.getElementById('imgPreview').src = d.imageUrl || '';
@@ -69,7 +134,11 @@
       });
     }
     function saveToken(){ const t = document.getElementById('adminToken').value.trim(); setToken(t); alert('Token sparad'); loadPosts(); }
-    window.addEventListener('DOMContentLoaded', ()=>{ document.getElementById('adminToken').value = getToken(); loadPosts(); });
+    window.addEventListener('DOMContentLoaded', ()=>{ 
+      document.getElementById('adminToken').value = getToken(); 
+      loadPosts();
+      loadAvailableLoras();
+    });
   </script>
   </head>
 <body>
@@ -95,7 +164,49 @@
       <select id="provider" style="width:100%; padding:.75rem; margin:.5rem 0 1rem; border-radius:8px; border:1px solid rgba(255,255,255,.2); background:rgba(255,255,255,.05); color:#fff;">
         <option value="gemini">Gemini</option>
         <option value="openai">OpenAI Custom</option>
+        <option value="comfyui">ComfyUI (Lokal)</option>
       </select>
+      
+      <div id="loraConfig" style="border:1px solid rgba(255,255,255,.1); border-radius:8px; padding:1rem; margin:1rem 0; background:rgba(255,255,255,.02);">
+        <label style="display:block; margin-bottom:.5rem;">LoRA Konfiguration (endast ComfyUI)</label>
+        
+        <div style="margin-bottom:1rem;">
+          <label style="font-weight:normal; font-size:.9rem;">LoRA 1</label>
+          <select id="lora1" style="width:100%; padding:.5rem; margin:.25rem 0; border-radius:6px; border:1px solid rgba(255,255,255,.2); background:rgba(255,255,255,.05); color:#fff;">
+            <option value="">-- Ingen --</option>
+          </select>
+          <div style="display:flex; align-items:center; gap:.5rem; margin-top:.25rem;">
+            <label style="font-weight:normal; font-size:.85rem; min-width:60px;">Styrka:</label>
+            <input type="range" id="loraStrength1" min="0" max="1" step="0.05" value="0.8" oninput="updateStrengthDisplay(1)" style="flex:1;" />
+            <span id="loraStrengthDisplay1" style="min-width:35px; font-size:.85rem;">0.8</span>
+          </div>
+        </div>
+        
+        <div style="margin-bottom:1rem;">
+          <label style="font-weight:normal; font-size:.9rem;">LoRA 2</label>
+          <select id="lora2" style="width:100%; padding:.5rem; margin:.25rem 0; border-radius:6px; border:1px solid rgba(255,255,255,.2); background:rgba(255,255,255,.05); color:#fff;">
+            <option value="">-- Ingen --</option>
+          </select>
+          <div style="display:flex; align-items:center; gap:.5rem; margin-top:.25rem;">
+            <label style="font-weight:normal; font-size:.85rem; min-width:60px;">Styrka:</label>
+            <input type="range" id="loraStrength2" min="0" max="1" step="0.05" value="0.6" oninput="updateStrengthDisplay(2)" style="flex:1;" />
+            <span id="loraStrengthDisplay2" style="min-width:35px; font-size:.85rem;">0.6</span>
+          </div>
+        </div>
+        
+        <div style="margin-bottom:0;">
+          <label style="font-weight:normal; font-size:.9rem;">LoRA 3</label>
+          <select id="lora3" style="width:100%; padding:.5rem; margin:.25rem 0; border-radius:6px; border:1px solid rgba(255,255,255,.2); background:rgba(255,255,255,.05); color:#fff;">
+            <option value="">-- Ingen --</option>
+          </select>
+          <div style="display:flex; align-items:center; gap:.5rem; margin-top:.25rem;">
+            <label style="font-weight:normal; font-size:.85rem; min-width:60px;">Styrka:</label>
+            <input type="range" id="loraStrength3" min="0" max="1" step="0.05" value="0.5" oninput="updateStrengthDisplay(3)" style="flex:1;" />
+            <span id="loraStrengthDisplay3" style="min-width:35px; font-size:.85rem;">0.5</span>
+          </div>
+        </div>
+      </div>
+      
       <div class="row">
         <button onclick="genArticle()">Generera artikel</button>
         <button onclick="genImage()">Generera bild</button>

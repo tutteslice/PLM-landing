@@ -13,6 +13,40 @@
   - `curl -X POST -H 'Content-Type: application/json' -d '{"email":"you@example.com"}' http://localhost:8888/.netlify/functions/subscribe`
 - Deploy to Netlify: `netlify deploy --prod` (ensure env vars are set).
 
+## Image Generation API
+The `image-generate.js` function supports multiple providers for AI image generation:
+
+### Providers
+- **openai**: Uses DALL-E 3 via OpenAI API (requires `OPENAI_API_KEY`)
+- **pollinations**: Free service, no API key required
+- **comfyui**: Local ComfyUI instance for custom stable diffusion workflows (requires `COMFYUI_API_URL`)
+
+### ComfyUI Provider
+ComfyUI integration allows using a local stable diffusion instance for more control over image generation.
+
+**Configuration:**
+- Set `COMFYUI_API_URL` environment variable (default: `http://192.168.1.31:8000`)
+- Ensure ComfyUI is running and accessible at the configured URL
+
+**Example request:**
+```bash
+curl -X POST -H 'Content-Type: application/json' \
+  -d '{"topic":"digital privacy surveillance","provider":"comfyui"}' \
+  http://localhost:8888/.netlify/functions/image-generate
+```
+
+**Response:**
+```json
+{
+  "imageUrl": "http://192.168.1.31:8000/view?filename=ComfyUI_00001_.png&type=output"
+}
+```
+
+**Error handling:**
+- Returns 502 if ComfyUI API is unreachable
+- Returns 504 if generation times out (>60 seconds)
+- All error messages are in Swedish for consistency
+
 ## Coding Style & Naming Conventions
 - JavaScript (functions): 2‑space indent, semicolons, single quotes, `camelCase` for vars/functions. Keep functions in `netlify/functions/*.js` using `exports.handler`.
 - CSS: class names in `kebab-case`; prefer utility-like, descriptive names. Keep styles inline in `index.html` unless extracting.
@@ -34,3 +68,12 @@
 - Secrets: never commit. Set `NEON_DATABASE_URL` in Netlify (or `.env` for local with `netlify dev`).
 - Database: ensure the `newsletter_subscribers(email, created_at)` table exists; the function safely `ON CONFLICT DO NOTHING`.
 - CORS: function returns `Access-Control-Allow-Origin: *`; narrow in production if embedding elsewhere.
+
+## Environment Variables
+Required environment variables for various features:
+
+- `NEON_DATABASE_URL`: PostgreSQL connection string for newsletter and news storage
+- `OPENAI_API_KEY`: OpenAI API key for DALL-E image generation (optional, only if using openai provider)
+- `GOOGLE_API_KEY`: Google Generative AI key for content generation
+- `COMFYUI_API_URL`: ComfyUI API endpoint (optional, defaults to `http://192.168.1.31:8000` if using comfyui provider)
+- `ADMIN_TOKEN`: Authentication token for admin operations
