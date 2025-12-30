@@ -5,7 +5,7 @@
   "type": "module",
   "description": "Private Lives Matter static site + Netlify Functions",
   "scripts": {
-    "dev": "wrangler pages dev ./public --port 8888",
+    "dev": "wrangler pages dev ./public --local --port 8888",
     "deploy": "wrangler pages publish ./public --project-name plm-landing --branch main",
     "test": "node --test functions/api/*.test.js"
   },

@@ -1,0 +1,7 @@
+{
+  "name": "CroatiaBeats - Translator & Festival Guide",
+  "description": "Translate Swedish or English to Croatian with audio support and learn essential phrases for electronic music festivals in Croatia.",
+  "requestFramePermissions": [
+    "microphone"
+  ]
+}
