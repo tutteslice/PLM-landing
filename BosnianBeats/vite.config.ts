@@ -13,7 +13,7 @@ export default defineConfig({
     emptyOutDir: true,
     rollupOptions: {
       input: {
-        main: path.resolve(__dirname, 'index-plm.html'),
+        main: path.resolve(__dirname, 'index.html'),
       },
       output: {
         entryFileNames: 'assets/[name]-[hash].js',
