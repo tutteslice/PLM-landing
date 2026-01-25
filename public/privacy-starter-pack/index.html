@@ -1,11 +1,12 @@
 <!DOCTYPE html>
-<html lang="sv">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Private Lives Matter - Digitala Rättigheter och bajs...</title>
-    <meta name="description" content="Försvara dina digitala rättigheter och yttrandefrihet. Lär dig om onlineövervakning och skydda din integritet.">
+    <title>Your Essential Privacy Starter Pack - Private Lives Matter</title>
+    <meta name="description" content="Get started with essential privacy tools: VPN, Secure Email, and Password Manager. Reclaim your digital freedom.">
     <style>
+        /* Existing styles from index.html */
         * {
             margin: 0;
             padding: 0;
@@ -38,7 +39,7 @@
 
         /* Header */
         header {
-            position: fixed;
+            position: relative; /* Changed from fixed to relative for internal pages */
             top: 0;
             width: 100%;
             background: rgba(26, 26, 46, 0.95);
@@ -79,18 +80,15 @@
             color: var(--accent-color);
         }
 
-        /* Hero Section */
-        .hero {
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+        /* Hero Section for internal pages */
+        .page-hero {
+            padding: 150px 0 50px 0; /* Adjusted padding for internal pages */
             text-align: center;
-            position: relative;
             background: var(--gradient-primary);
+            position: relative;
         }
 
-        .hero::before {
+        .page-hero::before {
             content: '';
             position: absolute;
             top: 0;
@@ -100,14 +98,14 @@
             background: rgba(26, 26, 46, 0.7);
         }
 
-        .hero-content {
+        .page-hero-content {
             position: relative;
             z-index: 2;
             max-width: 800px;
-            animation: fadeInUp 1s ease-out;
+            margin: 0 auto;
         }
 
-        .hero h1 {
+        .page-hero h1 {
             font-size: 3.5rem;
             font-weight: 800;
             margin-bottom: 1rem;
@@ -117,7 +115,7 @@
             background-clip: text;
         }
 
-        .hero .subtitle {
+        .page-hero .subtitle {
             font-size: 1.3rem;
             margin-bottom: 2rem;
             color: var(--text-muted);
@@ -157,6 +155,14 @@
             background-clip: text;
         }
 
+        .section-subtitle {
+            font-size: 1.1rem;
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto 3rem auto;
+            color: var(--text-muted);
+        }
+
         .content-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -185,17 +191,7 @@
             margin-bottom: 1rem;
             font-weight: 600;
         }
-
-        .orwell-quote {
-            background: rgba(233, 69, 96, 0.1);
-            border-left: 4px solid var(--accent-color);
-            padding: 2rem;
-            margin: 3rem 0;
-            border-radius: 0 10px 10px 0;
-            font-style: italic;
-            font-size: 1.1rem;
-        }
-
+        
         /* Newsletter Section */
         .newsletter {
             background: var(--gradient-primary);
@@ -250,66 +246,6 @@
             background: rgba(255, 255, 255, 0.15);
         }
 
-        /* About Section */
-        .about {
-            background: var(--secondary-color);
-        }
-
-        /* Footer */
-        footer {
-            background: var(--primary-color);
-            text-align: center;
-            padding: 2rem 0;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        /* Animations */
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .fade-in {
-            opacity: 0;
-            transform: translateY(30px);
-            animation: fadeInUp 0.8s ease-out forwards;
-        }
-
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            .nav-links {
-                display: none;
-            }
-
-            .hero h1 {
-                font-size: 2.5rem;
-            }
-
-            .hero .subtitle {
-                font-size: 1.1rem;
-            }
-
-            .newsletter-form {
-                flex-direction: column;
-                align-items: center;
-            }
-
-            .newsletter-input {
-                width: 100%;
-                max-width: 400px;
-            }
-
-            .content-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-
         /* Success message */
         .success-message {
             background: rgba(40, 167, 69, 0.2);
@@ -321,17 +257,36 @@
             display: none;
         }
 
-        .warning-box {
-            background: rgba(255, 193, 7, 0.1);
-            border: 1px solid rgba(255, 193, 7, 0.3);
-            padding: 1.5rem;
-            border-radius: 10px;
-            margin: 2rem 0;
+        /* Footer */
+        footer {
+            background: var(--primary-color);
+            text-align: center;
+            padding: 2rem 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
         }
 
-        .warning-box h4 {
-            color: #ffc107;
-            margin-bottom: 0.5rem;
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .page-hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .page-hero .subtitle {
+                font-size: 1.1rem;
+            }
+            .newsletter-form {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .newsletter-input {
+                width: 100%;
+                max-width: 400px;
+            }
         }
     </style>
 </head>
@@ -341,35 +296,34 @@
             <nav>
                 <a href="/" class="logo">Private Lives Matter</a>
                 <ul class="nav-links">
-                    <li><a href="#hem">Home</a></li>
-                    <li><a href="#privacy-starter-pack">Privacy Tools</a></li>
-                    <li><a href="#comparison-preview">Comparisons</a></li>
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/#privacy-starter-pack">Privacy Tools</a></li>
+                    <li><a href="/#comparison-preview">Comparisons</a></li>
                     <li><a href="/about">About</a></li>
-                    <li><a href="#newsletter">Newsletter</a></li>
+                    <li><a href="/#newsletter">Newsletter</a></li>
                 </ul>
             </nav>
         </div>
     </header>
 
-    <section id="hem" class="hero">
+    <section class="page-hero">
         <div class="container">
-            <div class="hero-content">
-                <h1>Take Back Your Online Privacy</h1>
-                <p class="subtitle">Every click you make is tracked, your data is sold, and your conversations are monitored. It's time to fight back.</p>
-                <a href="#privacy-starter-pack" class="cta-button">Start Protecting Your Privacy</a>
+            <div class="page-hero-content">
+                <h1>Your Essential Privacy Starter Pack</h1>
+                <p class="subtitle">Get Started with the Fundamental Tools to Reclaim Your Digital Freedom</p>
             </div>
         </div>
     </section>
 
-    <section id="privacy-starter-pack" style="background: var(--secondary-color);">
+    <section id="privacy-tools" style="background: var(--secondary-color);">
         <div class="container">
-            <h2 class="section-title">Your Privacy Starter Pack</h2>
-            <p class="section-subtitle" style="text-align: center; max-width: 600px; margin: 0 auto 3rem auto; color: var(--text-muted);">
-                Reclaim your digital privacy with these essential tools. We've selected the best-in-class services to protect your identity, communications, and data.
+            <h2 class="section-title">Essential Privacy Tools</h2>
+            <p class="section-subtitle">
+                These tools form the foundation of a privacy-first digital life. We've hand-picked the best services to help you secure your online presence, communications, and personal data.
             </p>
             
             <div class="content-grid">
-                <div class="content-card fade-in">
+                <div class="content-card">
                     <h3>NordVPN</h3>
                     <p style="margin-bottom: 1rem;">Hide Your IP & Encrypt Your Traffic</p>
                     <ul style="list-style-position: inside; padding-left: 1rem; margin-bottom: 1.5rem;">
@@ -381,7 +335,7 @@
                     <p style="font-size: 0.8rem; color: var(--text-muted); margin-top: 1rem;">* Affiliate link. We may earn a commission.</p>
                 </div>
                 
-                <div class="content-card fade-in">
+                <div class="content-card">
                     <h3>Proton Mail</h3>
                     <p style="margin-bottom: 1rem;">Private Email Alternative to Gmail</p>
                     <ul style="list-style-position: inside; padding-left: 1rem; margin-bottom: 1.5rem;">
@@ -393,7 +347,7 @@
                     <p style="font-size: 0.8rem; color: var(--text-muted); margin-top: 1rem;">* Affiliate link. We may earn a commission.</p>
                 </div>
 
-                <div class="content-card fade-in">
+                <div class="content-card">
                     <h3>1Password</h3>
                     <p style="margin-bottom: 1rem;">Stop Password Breaches & Secure Data</p>
                     <ul style="list-style-position: inside; padding-left: 1rem; margin-bottom: 1.5rem;">
@@ -403,29 +357,6 @@
                     </ul>
                     <a href="https://1password.com/affiliate" class="cta-button" target="_blank" rel="noopener noreferrer">Get 1Password</a>
                     <p style="font-size: 0.8rem; color: var(--text-muted); margin-top: 1rem;">* Affiliate link. We may earn a commission.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="comparison-preview">
-        <div class="container">
-            <h2 class="section-title">In-Depth Comparisons</h2>
-             <div class="content-grid">
-                <div class="content-card fade-in" style="cursor: pointer;" onclick="window.location.href='/best-vpn'">
-                    <h3>Best VPN Services</h3>
-                    <p>We compare NordVPN and Surfshark head-to-head on speed, security, and privacy features.</p>
-                    <p style="margin-top: 1rem; color: var(--accent-color); font-weight: 600;">View Comparison →</p>
-                </div>
-                <div class="content-card fade-in" style="cursor: pointer;" onclick="window.location.href='/secure-email'">
-                    <h3>Secure Email Providers</h3>
-                    <p>Is Proton Mail truly the best private email? See how it stacks up against Gmail and Tutanota.</p>
-                    <p style="margin-top: 1rem; color: var(--accent-color); font-weight: 600;">View Comparison →</p>
-                </div>
-                <div class="content-card fade-in" style="cursor: pointer;" onclick="window.location.href='/password-managers'">
-                    <h3>Password Managers</h3>
-                    <p>A deep dive into 1Password vs. Bitwarden to find the ultimate password security solution.</p>
-                    <p style="margin-top: 1rem; color: var(--accent-color); font-weight: 600;">View Comparison →</p>
                 </div>
             </div>
         </div>
@@ -460,7 +391,7 @@
         </div>
     </section>
 
-        <footer>
+    <footer>
         <div class="container">
             <p>&copy; 2024 Private Lives Matter. All rights reserved.</p>
             <p style="margin-top: 0.5rem; font-size: 0.9rem; color: var(--text-muted);">
@@ -476,23 +407,7 @@
     </footer>
 
     <script>
-
-        console.log(process.env) 
-        // Smooth scrolling for navigation links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
-            });
-        });
-
-        // Newsletter subscription
+        // Newsletter subscription script (same as homepage)
         async function subscribeNewsletter() {
         const email = document.getElementById('emailInput').value;
         const gdprConsent = document.getElementById('gdpr-consent');
@@ -535,40 +450,30 @@
             alert('An error occurred. Please try again later.');
         }
     }
-        // Header scroll effect
-        window.addEventListener('scroll', () => {
-            const header = document.querySelector('header');
-            if (window.scrollY > 100) {
-                header.style.background = 'rgba(26, 26, 46, 0.98)';
-            } else {
-                header.style.background = 'rgba(26, 26, 46, 0.95)';
-            }
-        });
-
-        // Intersection Observer for fade-in animations
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.style.animationDelay = Math.random() * 0.3 + 's';
-                    entry.target.classList.add('fade-in');
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="/#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href').split('#')[1];
+                const targetElement = document.getElementById(targetId);
+                if (targetElement) {
+                    window.location.href = '/' + this.getAttribute('href'); // Navigate to homepage and then scroll
                 }
             });
-        }, observerOptions);
-
-        // Observe all content cards
-        document.querySelectorAll('.content-card').forEach(card => {
-            observer.observe(card);
         });
 
-        // Allow newsletter signup with Enter key
-        document.getElementById('emailInput').addEventListener('keypress', function(e) {
-            if (e.key === 'Enter') {
-                subscribeNewsletter();
+        // Simple scroll to top for internal navigation
+        document.addEventListener('DOMContentLoaded', () => {
+            if (window.location.hash) {
+                const targetElement = document.querySelector(window.location.hash);
+                if (targetElement) {
+                    setTimeout(() => { // Small delay to ensure content is rendered
+                        targetElement.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }, 100);
+                }
             }
         });
     </script>

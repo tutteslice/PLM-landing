@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Best Password Managers: 1Password vs Bitwarden - Private Lives Matter</title>
+    <meta name="description" content="Compare 1Password and Bitwarden for security features, ease of use, and privacy. Find the best password manager.">
+    <style>
+        /* Existing styles from index.html */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #1a1a2e;
+            --secondary-color: #16213e;
+            --accent-color: #e94560;
+            --text-light: #ffffff;
+            --text-muted: #b8b8b8;
+            --gradient-primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --gradient-dark: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            line-height: 1.6;
+            color: var(--text-light);
+            background: linear-gradient(135deg, #0f4c75 0%, #1b262c 100%);
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            position: relative; /* Changed from fixed to relative for internal pages */
+            top: 0;
+            width: 100%;
+            background: rgba(26, 26, 46, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--accent-color);
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: var(--text-light);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent-color);
+        }
+
+        /* Hero Section for internal pages */
+        .page-hero {
+            padding: 150px 0 50px 0; /* Adjusted padding for internal pages */
+            text-align: center;
+            background: var(--gradient-primary);
+            position: relative;
+        }
+
+        .page-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(26, 26, 46, 0.7);
+        }
+
+        .page-hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .page-hero h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            background: linear-gradient(45deg, #fff, #e94560);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .page-hero .subtitle {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            color: var(--text-muted);
+            font-weight: 400;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: var(--accent-color);
+            color: white;
+            padding: 15px 40px;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(233, 69, 96, 0.3);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(233, 69, 96, 0.4);
+        }
+
+        /* Sections */
+        section {
+            padding: 100px 0;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 3rem;
+            background: linear-gradient(45deg, #fff, #b8b8b8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .content-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .content-card {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 2rem;
+            border-radius: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+
+        .content-card:hover {
+            transform: translateY(-10px);
+            background: rgba(255, 255, 255, 0.08);
+            border-color: var(--accent-color);
+        }
+
+        .content-card h3 {
+            font-size: 1.3rem;
+            color: var(--accent-color);
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+        
+        /* Comparison Table Specific Styles */
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 2rem;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .comparison-table th, .comparison-table td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .comparison-table th {
+            background-color: var(--accent-color);
+            color: white;
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+        }
+
+        .comparison-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .comparison-table td:first-child {
+            font-weight: 600;
+            color: var(--accent-color);
+        }
+
+        .recommendation {
+            text-align: center;
+            margin-top: 3rem;
+            padding: 2rem;
+            background: rgba(233, 69, 96, 0.1);
+            border: 1px solid var(--accent-color);
+            border-radius: 10px;
+        }
+
+        .recommendation h2 {
+            color: var(--accent-color);
+            margin-bottom: 1rem;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--primary-color);
+            text-align: center;
+            padding: 2rem 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .page-hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .page-hero .subtitle {
+                font-size: 1.1rem;
+            }
+            .comparison-table, .comparison-table tbody, .comparison-table tr, .comparison-table td {
+                display: block;
+                width: 100%;
+            }
+            .comparison-table tr {
+                margin-bottom: 1rem;
+            }
+            .comparison-table td {
+                text-align: right;
+                padding-left: 50%;
+                position: relative;
+            }
+            .comparison-table td::before {
+                content: attr(data-label);
+                position: absolute;
+                left: 10px;
+                width: calc(50% - 20px);
+                text-align: left;
+                font-weight: 600;
+                color: var(--accent-color);
+            }
+            .comparison-table th {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <nav>
+                <a href="/" class="logo">Private Lives Matter</a>
+                <ul class="nav-links">
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/#privacy-starter-pack">Privacy Tools</a></li>
+                    <li><a href="/#comparison-preview">Comparisons</a></li>
+                    <li><a href="/about">About</a></li>
+                    <li><a href="/#newsletter">Newsletter</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="page-hero">
+        <div class="container">
+            <div class="page-hero-content">
+                <h1>Best Password Managers</h1>
+                <p class="subtitle">1Password vs Bitwarden: Securing Your Digital Keys</p>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <div class="container">
+            <h2 class="section-title">Protecting Your Digital Identity</h2>
+            <p style="text-align: center; max-width: 800px; margin: 0 auto 3rem auto; color: var(--text-muted);">
+                Password managers are crucial for generating and storing strong, unique passwords for all your online accounts. We compare 1Password and Bitwarden, two of the most trusted options, to help you make an informed choice.
+            </p>
+
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th>Feature</th>
+                        <th>1Password</th>
+                        <th>Bitwarden</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td data-label="Feature">Security Model</td>
+                        <td data-label="1Password">Proprietary (Audited)</td>
+                        <td data-label="Bitwarden">Open-Source (Audited)</td>
+                    </tr>
+                    <tr>
+                        <td data-label="Feature">Ease of Use</td>
+                        <td data-label="1Password">Excellent UI/UX, user-friendly</td>
+                        <td data-label="Bitwarden">Good, slightly more technical</td>
+                    </tr>
+                    <tr>
+                        <td data-label="Feature">Device Sync</td>
+                        <td data-label="1Password">Cloud-based, seamless sync</td>
+                        <td data-label="Bitwarden">Cloud-based (or self-hosted), seamless sync</td>
+                    </tr>
+                    <tr>
+                        <td data-label="Feature">Pricing (Personal)</td>
+                        <td data-label="1Password">Starts at ~$2.99/month</td>
+                        <td data-label="Bitwarden">Free plan available, premium at ~$10/year</td>
+                    </tr>
+                    <tr>
+                        <td data-label="Feature">Key Features</td>
+                        <td data-label="1Password">Travel Mode, Watchtower (breach monitoring), Secure Notes, Document Storage</td>
+                        <td data-label="Bitwarden">Self-hosting option, Send (secure sharing), TOTP support</td>
+                    </tr>
+                    <tr>
+                        <td data-label="Feature">Affiliate Link</td>
+                        <td data-label="1Password"><a href="https://1password.com/affiliate" class="cta-button" target="_blank" rel="noopener noreferrer">Get 1Password</a></td>
+                        <td data-label="Bitwarden"><a href="https://bitwarden.com/affiliate" class="cta-button" target="_blank" rel="noopener noreferrer">Get Bitwarden</a></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="recommendation">
+                <h2>Our Recommendation: 1Password (Primary), Bitwarden (Secondary)</h2>
+                <p style="font-size: 1.1rem; margin-bottom: 1rem;">
+                    <strong>1Password</strong> offers a polished, intuitive experience with robust features, making it our top choice for most users seeking maximum convenience and security.
+                </p>
+                <p style="font-size: 1.1rem; margin-bottom: 1rem;">
+                    For those who prioritize open-source software, self-hosting capabilities, or a free entry point, <strong>Bitwarden</strong> is an excellent and highly secure alternative.
+                </p>
+                <a href="https://1password.com/affiliate" class="cta-button" target="_blank" rel="noopener noreferrer" style="margin-right: 1rem;">Get 1Password</a>
+                <a href="https://bitwarden.com/affiliate" class="cta-button" target="_blank" rel="noopener noreferrer">Get Bitwarden</a>
+                <p style="font-size: 0.8rem; color: var(--text-muted); margin-top: 1rem;">* Affiliate links. We may earn a commission.</p>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 Private Lives Matter. All rights reserved.</p>
+            <p style="margin-top: 0.5rem; font-size: 0.9rem; color: var(--text-muted);">
+                Built to defend digital freedom and human rights.
+            </p>
+            <div style="margin-top: 1rem;">
+                <a href="/privacy-policy" style="color: var(--text-muted); text-decoration: none; margin: 0 10px;">Privacy Policy</a>
+                <a href="/cookie-policy" style="color: var(--text-muted); text-decoration: none; margin: 0 10px;">Cookie Policy</a>
+                <a href="/affiliate-disclosure" style="color: var(--text-muted); text-decoration: none; margin: 0 10px;">Affiliate Disclosure</a>
+                <a href="/about" style="color: var(--text-muted); text-decoration: none; margin: 0 10px;">About Us</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="/#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href').split('#')[1];
+                const targetElement = document.getElementById(targetId);
+                if (targetElement) {
+                    window.location.href = '/' + this.getAttribute('href'); // Navigate to homepage and then scroll
+                }
+            });
+        });
+
+        // Simple scroll to top for internal navigation
+        document.addEventListener('DOMContentLoaded', () => {
+            if (window.location.hash) {
+                const targetElement = document.querySelector(window.location.hash);
+                if (targetElement) {
+                    setTimeout(() => { // Small delay to ensure content is rendered
+                        targetElement.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }, 100);
+                }
+            }
+        });
+    </script>
+</body>
+</html>

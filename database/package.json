@@ -1,0 +1,14 @@
+{
+  "name": "plm-affiliate-database",
+  "version": "1.0.0",
+  "description": "Database migration for Private Lives Matter affiliate marketing",
+  "type": "module",
+  "scripts": {
+    "migrate": "node migrate.js",
+    "verify": "node verify.js"
+  },
+  "dependencies": {
+    "pg": "^8.11.3",
+    "dotenv": "^16.3.1"
+  }
+}

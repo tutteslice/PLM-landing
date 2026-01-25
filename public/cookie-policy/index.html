@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cookie Policy - Private Lives Matter</title>
+    <meta name="description" content="Understand how Private Lives Matter uses cookies and your choices regarding them.">
+    <style>
+        /* Existing styles from index.html */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #1a1a2e;
+            --secondary-color: #16213e;
+            --accent-color: #e94560;
+            --text-light: #ffffff;
+            --text-muted: #b8b8b8;
+            --gradient-primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --gradient-dark: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            line-height: 1.6;
+            color: var(--text-light);
+            background: linear-gradient(135deg, #0f4c75 0%, #1b262c 100%);
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            position: relative; /* Changed from fixed to relative for internal pages */
+            top: 0;
+            width: 100%;
+            background: rgba(26, 26, 46, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--accent-color);
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: var(--text-light);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent-color);
+        }
+
+        /* Hero Section for internal pages */
+        .page-hero {
+            padding: 150px 0 50px 0; /* Adjusted padding for internal pages */
+            text-align: center;
+            background: var(--gradient-primary);
+            position: relative;
+        }
+
+        .page-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(26, 26, 46, 0.7);
+        }
+
+        .page-hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .page-hero h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            background: linear-gradient(45deg, #fff, #e94560);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .page-hero .subtitle {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            color: var(--text-muted);
+            font-weight: 400;
+        }
+
+        /* Sections */
+        section {
+            padding: 100px 0;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 3rem;
+            background: linear-gradient(45deg, #fff, #b8b8b8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .content-block {
+            max-width: 800px;
+            margin: 0 auto;
+            color: var(--text-light);
+        }
+
+        .content-block h2 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: var(--accent-color);
+        }
+
+        .content-block h3 {
+            font-size: 1.5rem;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+            color: var(--text-light);
+        }
+
+        .content-block p {
+            margin-bottom: 1rem;
+            line-height: 1.8;
+        }
+
+        .content-block ul {
+            list-style-type: disc;
+            margin-left: 20px;
+            margin-bottom: 1rem;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--primary-color);
+            text-align: center;
+            padding: 2rem 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .page-hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .page-hero .subtitle {
+                font-size: 1.1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <nav>
+                <a href="/" class="logo">Private Lives Matter</a>
+                <ul class="nav-links">
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/#privacy-starter-pack">Privacy Tools</a></li>
+                    <li><a href="/#comparison-preview">Comparisons</a></li>
+                    <li><a href="/about">About</a></li>
+                    <li><a href="/#newsletter">Newsletter</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="page-hero">
+        <div class="container">
+            <div class="page-hero-content">
+                <h1>Cookie Policy</h1>
+                <p class="subtitle">Understanding Our Use of Cookies</p>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <div class="container">
+            <div class="content-block">
+                <p><strong>Effective Date: January 25, 2026</strong></p>
+
+                <h3>What Are Cookies?</h3>
+                <p>Cookies are small pieces of data stored on your device (computer or mobile device) when you browse websites. They are widely used to make websites work more efficiently, as well as to provide information to the owners of the site.</p>
+
+                <h3>How We Use Cookies</h3>
+                <p>We use cookies to enhance your experience on Private Lives Matter. Specifically, we may use cookies for:</p>
+                <ul>
+                    <li><strong>Essential Website Functionality:</strong> These cookies are necessary for the website to function and cannot be switched off in our systems. They are usually only set in response to actions made by you which amount to a request for services, such as setting your privacy preferences, logging in, or filling in forms.</li>
+                    <li><strong>Analytics:</strong> We may use third-party analytics services (e.g., Google Analytics) to collect information about how you use our website, such as which pages you visit, how long you stay, and what links you click. This helps us to understand user behavior and improve our website's content and performance. These cookies do not collect personally identifiable information.</li>
+                    <li><strong>Affiliate Tracking:</strong> We use cookies to track referrals from our affiliate links. This allows us to earn a commission when you purchase a product or service through our recommendations. These cookies do not collect any personal data, only anonymous tracking identifiers.</li>
+                </ul>
+
+                <h3>Your Choices Regarding Cookies</h3>
+                <p>You have the right to decide whether to accept or reject cookies. You can exercise your cookie preferences by:</p>
+                <ul>
+                    <li><strong>Browser Settings:</strong> Most web browsers allow you to control cookies through their settings. You can usually find these settings in the "options" or "preferences" menu of your browser.</li>
+                    <li><strong>Cookie Consent Tool:</strong> We will implement a cookie consent banner on our website, allowing you to manage your preferences regarding non-essential cookies.</li>
+                </ul>
+                <p>Please note that if you choose to reject cookies, some parts of our website may not function properly.</p>
+
+                <h3>Changes to This Cookie Policy</h3>
+                <p>We may update our Cookie Policy from time to time. We will notify you of any changes by posting the new Cookie Policy on this page. You are advised to review this Cookie Policy periodically for any changes. Changes to this Cookie Policy are effective when they are posted on this page.</p>
+
+                <h3>Contact Us</h3>
+                <p>If you have any questions about this Cookie Policy, please contact us via the contact information provided on our About Us page.</p>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 Private Lives Matter. All rights reserved.</p>
+            <p style="margin-top: 0.5rem; font-size: 0.9rem; color: var(--text-muted);">
+                Built to defend digital freedom and human rights.
+            </p>
+            <div style="margin-top: 1rem;">
+                <a href="/privacy-policy" style="color: var(--text-muted); text-decoration: none; margin: 0 10px;">Privacy Policy</a>
+                <a href="/cookie-policy" style="color: var(--text-muted); text-decoration: none; margin: 0 10px;">Cookie Policy</a>
+                <a href="/affiliate-disclosure" style="color: var(--text-muted); text-decoration: none; margin: 0 10px;">Affiliate Disclosure</a>
+                <a href="/about" style="color: var(--text-muted); text-decoration: none; margin: 0 10px;">About Us</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="/#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href').split('#')[1];
+                const targetElement = document.getElementById(targetId);
+                if (targetElement) {
+                    window.location.href = '/' + this.getAttribute('href'); // Navigate to homepage and then scroll
+                }
+            });
+        });
+
+        // Simple scroll to top for internal navigation
+        document.addEventListener('DOMContentLoaded', () => {
+            if (window.location.hash) {
+                const targetElement = document.querySelector(window.location.hash);
+                if (targetElement) {
+                    setTimeout(() => { // Small delay to ensure content is rendered
+                        targetElement.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }, 100);
+                }
+            }
+        });
+    </script>
+</body>
+</html>
