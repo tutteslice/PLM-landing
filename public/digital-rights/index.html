@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digital Rights Under Attack: Privacy & Free Speech - Private Lives Matter</title>
+    <meta name="description" content="Explore the erosion of digital privacy and free speech globally, with real-world examples and a comparison to Orwell's 1984.">
+    <style>
+        /* Existing styles from index.html */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #1a1a2e;
+            --secondary-color: #16213e;
+            --accent-color: #e94560;
+            --text-light: #ffffff;
+            --text-muted: #b8b8b8;
+            --gradient-primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --gradient-dark: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            line-height: 1.6;
+            color: var(--text-light);
+            background: linear-gradient(135deg, #0f4c75 0%, #1b262c 100%);
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            position: relative; /* Changed from fixed to relative for internal pages */
+            top: 0;
+            width: 100%;
+            background: rgba(26, 26, 46, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--accent-color);
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: var(--text-light);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent-color);
+        }
+
+        /* Hero Section for internal pages */
+        .page-hero {
+            padding: 150px 0 50px 0; /* Adjusted padding for internal pages */
+            text-align: center;
+            background: var(--gradient-primary);
+            position: relative;
+        }
+
+        .page-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(26, 26, 46, 0.7);
+        }
+
+        .page-hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .page-hero h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            background: linear-gradient(45deg, #fff, #e94560);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .page-hero .subtitle {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            color: var(--text-muted);
+            font-weight: 400;
+        }
+
+        /* Sections */
+        section {
+            padding: 100px 0;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 3rem;
+            background: linear-gradient(45deg, #fff, #b8b8b8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .section-subtitle {
+            font-size: 1.1rem;
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto 3rem auto;
+            color: var(--text-muted);
+        }
+
+        .content-block {
+            max-width: 800px;
+            margin: 0 auto;
+            color: var(--text-light);
+        }
+
+        .content-block h2 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: var(--accent-color);
+        }
+
+        .content-block h3 {
+            font-size: 1.5rem;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+            color: var(--text-light);
+        }
+
+        .content-block p {
+            margin-bottom: 1rem;
+            line-height: 1.8;
+        }
+
+        .content-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .content-card {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 2rem;
+            border-radius: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+
+        .content-card h3 {
+            font-size: 1.3rem;
+            color: var(--accent-color);
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
+        .orwell-quote {
+            background: rgba(233, 69, 96, 0.1);
+            border-left: 4px solid var(--accent-color);
+            padding: 2rem;
+            margin: 3rem auto; /* Centered */
+            max-width: 800px; /* Max width for readability */
+            border-radius: 0 10px 10px 0;
+            font-style: italic;
+            font-size: 1.1rem;
+        }
+
+        .warning-box {
+            background: rgba(255, 193, 7, 0.1);
+            border: 1px solid rgba(255, 193, 7, 0.3);
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin: 2rem auto; /* Centered */
+            max-width: 800px; /* Max width for readability */
+        }
+
+        .warning-box h4 {
+            color: #ffc107;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--primary-color);
+            text-align: center;
+            padding: 2rem 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .page-hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .page-hero .subtitle {
+                font-size: 1.1rem;
+            }
+            .content-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <nav>
+                <a href="/" class="logo">Private Lives Matter</a>
+                <ul class="nav-links">
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/#privacy-starter-pack">Privacy Tools</a></li>
+                    <li><a href="/#comparison-preview">Comparisons</a></li>
+                    <li><a href="/about">About</a></li>
+                    <li><a href="/#newsletter">Newsletter</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="page-hero">
+        <div class="container">
+            <div class="page-hero-content">
+                <h1>Digital Rights Under Attack</h1>
+                <p class="subtitle">The Erosion of Privacy and Free Speech Online</p>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <div class="container">
+            <h2 class="section-title">The Battle for Our Digital Freedoms</h2>
+            <p class="section-subtitle">
+                Across the globe, the foundational principles of digital privacy and free speech are being challenged. Governments and corporations are increasing surveillance, control, and censorship, reshaping the internet into a tool for compliance rather than liberation.
+            </p>
+
+            <div class="content-grid">
+                <div class="content-card">
+                    <h3>📱 Chat Control & Mass Surveillance</h3>
+                    <p>Proposed legislation in many regions, including the EU, aims to implement "chat control," mandating the scanning of all private communications. This threatens our right to private communication and opens the door for mass surveillance, potentially silencing dissent and independent thought.</p>
+                </div>
+
+                <div class="content-card">
+                    <h3>🗣️ Free Speech Under Threat</h3>
+                    <p>An alarming trend sees individuals prosecuted and even jailed for expressing opinions on social media. What was once protected as free speech is increasingly reclassified as "hate speech" or "misinformation" based on subjective interpretations, leading to a chilling effect on online discourse.</p>
+                </div>
+
+                <div class="content-card">
+                    <h3>🔐 Technical Censorship & Deplatforming</h3>
+                    <p>Major tech companies are actively censoring content, often in collaboration with governments. Algorithms and AI systems are used to automatically limit the spread of "undesirable" opinions, while individuals and organizations are deplatformed, effectively erasing their online presence and voice.</p>
+                </div>
+            </div>
+
+            <div class="orwell-quote">
+                <p>"If you want a picture of the future, imagine a boot stamping on a human face — forever."</p>
+                <p><strong>- George Orwell, 1984</strong></p>
+            </div>
+
+            <div class="warning-box">
+                <h4>⚠️ Real-World Cases of Persecution</h4>
+                <div class="content-grid">
+                    <div>
+                        <h5>United Kingdom</h5>
+                        <p>Over 3,000 individuals were arrested in 2022 for "offensive" social media posts. Many faced legal action or imprisonment for comments, memes, and satirical content deemed inappropriate by authorities.</p>
+                    </div>
+                    <div>
+                        <h5>Germany</h5>
+                        <p>Hundreds of house searches are conducted annually against individuals for sharing "problematic" posts on platforms like Facebook and Twitter, often under strict hate speech laws.</p>
+                    </div>
+                    <div>
+                        <h5>France</h5>
+                        <p>Teachers and journalists have faced legal penalties, including jail time, for expressing opinions online that were deemed to "offend" certain groups, highlighting a growing tension between free expression and public order.</p>
+                    </div>
+                </div>
+            </div>
+
+            <h2 class="section-title">Parallels to Orwell's 1984</h2>
+            <div class="content-grid">
+                <div class="content-card">
+                    <h4>Thought Police</h4>
+                    <p>Just as in 1984, our private thoughts and expressions are now monitored through digital tracking. AI algorithms analyze our messages and online behavior for "wrongthink," creating an environment where self-censorship becomes the norm.</p>
+                </div>
+                <div class="content-card">
+                    <h4>Newspeak</h4>
+                    <p>Language is being redefined to restrict thought. Terms like "hate speech" and "misinformation" are weaponized to suppress legitimate opinions and stifle debate, limiting the scope of what can be safely discussed.</p>
+                </div>
+                <div class="content-card">
+                    <h4>Memory Holes</h4>
+                    <p>Social media platforms and search engines actively delete historical content and de-platform accounts, creating digital "memory holes" where uncomfortable truths or dissenting narratives simply vanish, controlling the past to control the future.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 Private Lives Matter. All rights reserved.</p>
+            <p style="margin-top: 0.5rem; font-size: 0.9rem; color: var(--text-muted);">
+                Built to defend digital freedom and human rights.
+            </p>
+            <div style="margin-top: 1rem;">
+                <a href="/privacy-policy" style="color: var(--text-muted); text-decoration: none; margin: 0 10px;">Privacy Policy</a>
+                <a href="/cookie-policy" style="color: var(--text-muted); text-decoration: none; margin: 0 10px;">Cookie Policy</a>
+                <a href="/affiliate-disclosure" style="color: var(--text-muted); text-decoration: none; margin: 0 10px;">Affiliate Disclosure</a>
+                <a href="/about" style="color: var(--text-muted); text-decoration: none; margin: 0 10px;">About Us</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="/#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href').split('#')[1];
+                const targetElement = document.getElementById(targetId);
+                if (targetElement) {
+                    window.location.href = '/' + this.getAttribute('href'); // Navigate to homepage and then scroll
+                }
+            });
+        });
+
+        // Simple scroll to top for internal navigation
+        document.addEventListener('DOMContentLoaded', () => {
+            if (window.location.hash) {
+                const targetElement = document.querySelector(window.location.hash);
+                if (targetElement) {
+                    setTimeout(() => { // Small delay to ensure content is rendered
+                        targetElement.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }, 100);
+                }
+            });
+        });
+    </script>
+</body>
+</html>
