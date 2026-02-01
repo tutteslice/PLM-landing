@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Proton Mail Review - Secure Email Service - Private Lives Matter</title>
+    <meta name="description" content="Comprehensive Proton Mail review: features, security, privacy, and pricing. Learn why Proton Mail is the most secure email service available.">
+    <style>
+        /* Existing styles from index.html */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #1a1a2e;
+            --secondary-color: #16213e;
+            --accent-color: #e94560;
+            --text-light: #ffffff;
+            --text-muted: #b8b8b8;
+            --gradient-primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --gradient-dark: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            line-height: 1.6;
+            color: var(--text-light);
+            background: linear-gradient(135deg, #0f4c75 0%, #1b262c 100%);
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            position: relative;
+            top: 0;
+            width: 100%;
+            background: rgba(26, 26, 46, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--accent-color);
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: var(--text-light);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent-color);
+        }
+
+        /* Hero Section */
+        .page-hero {
+            padding: 150px 0 50px 0;
+            text-align: center;
+            background: var(--gradient-primary);
+            position: relative;
+        }
+
+        .page-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(26, 26, 46, 0.7);
+        }
+
+        .page-hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .page-hero h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            background: linear-gradient(45deg, #fff, #e94560);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .page-hero .subtitle {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            color: var(--text-muted);
+            font-weight: 400;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: var(--accent-color);
+            color: white;
+            padding: 15px 40px;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(233, 69, 96, 0.3);
+            margin: 0.5rem;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(233, 69, 96, 0.4);
+        }
+
+        .cta-button.secondary {
+            background: transparent;
+            border: 2px solid var(--accent-color);
+        }
+
+        .cta-button.secondary:hover {
+            background: var(--accent-color);
+        }
+
+        /* Sections */
+        section {
+            padding: 100px 0;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 3rem;
+            background: linear-gradient(45deg, #fff, #b8b8b8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .content-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .content-card {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 2rem;
+            border-radius: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+
+        .content-card:hover {
+            transform: translateY(-10px);
+            background: rgba(255, 255, 255, 0.08);
+            border-color: var(--accent-color);
+        }
+
+        .content-card h3 {
+            font-size: 1.3rem;
+            color: var(--accent-color);
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
+        .feature-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .feature-list li {
+            padding: 0.5rem 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .feature-list li:last-child {
+            border-bottom: none;
+        }
+
+        .feature-list li::before {
+            content: "✓";
+            color: #28a745;
+            font-weight: bold;
+            margin-right: 0.5rem;
+        }
+
+        .pricing-table {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            padding: 2rem;
+            margin: 2rem 0;
+        }
+
+        .pricing-table h3 {
+            color: var(--accent-color);
+            margin-bottom: 1rem;
+        }
+
+        .pros-cons {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .pros, .cons {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 2rem;
+            border-radius: 15px;
+        }
+
+        .pros h3 {
+            color: #28a745;
+        }
+
+        .cons h3 {
+            color: #dc3545;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--primary-color);
+            text-align: center;
+            padding: 2rem 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .page-hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .page-hero .subtitle {
+                font-size: 1.1rem;
+            }
+
+            .pros-cons {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <nav>
+                <a href="/" class="logo">Private Lives Matter</a>
+                <ul class="nav-links">
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/privacy-starter-pack">Privacy Tools</a></li>
+                    <li><a href="/#comparison-preview">Comparisons</a></li>
+                    <li><a href="/about">About</a></li>
+                    <li><a href="/#newsletter">Newsletter</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="page-hero">
+        <div class="container">
+            <div class="page-hero-content">
+                <h1>Proton Mail</h1>
+                <p class="subtitle">Private Email Alternative to Gmail</p>
+                <div style="margin-top: 2rem;">
+                    <a href="https://go.getproton.me/aff_c?offer_id=7&aff_id=15997" class="cta-button" target="_blank" rel="noopener noreferrer">Get Proton Mail</a>
+                    <a href="/privacy-starter-pack" class="cta-button secondary">Back to Privacy Tools</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <div class="container">
+            <h2 class="section-title">Why Proton Mail is the Gold Standard for Email Privacy</h2>
+            
+            <div class="content-grid">
+                <div class="content-card">
+                    <h3>End-to-End Encryption</h3>
+                    <p>Proton Mail uses zero-access encryption, meaning even Proton Mail employees cannot read your emails. Only you and your recipients can access your messages.</p>
+                </div>
+                
+                <div class="content-card">
+                    <h3>Swiss Privacy Protection</h3>
+                    <p>Based in Switzerland, Proton Mail benefits from some of the strongest privacy laws in the world. Your data is protected from government surveillance requests.</p>
+                </div>
+                
+                <div class="content-card">
+                    <h3>Anonymous Sign-up</h3>
+                    <p>Create an account without providing personal information. No phone number or real name required, ensuring complete anonymity.</p>
+                </div>
+            </div>
+
+            <div class="pricing-table">
+                <h3>Pricing Plans</h3>
+                <ul class="feature-list">
+                    <li>Free: 1 email address, 500MB storage</li>
+                    <li>Mail Plus: $4.99/month - 15 email addresses, 15GB storage</li>
+                    <li>Unlimited: $9.99/month - Unlimited addresses, 500GB storage</li>
+                    <li>Business plans available</li>
+                </ul>
+            </div>
+
+            <div class="pros-cons">
+                <div class="pros">
+                    <h3>Pros</h3>
+                    <ul class="feature-list">
+                        <li>Military-grade encryption</li>
+                        <li>Open source code</li>
+                        <li>No ads even in free version</li>
+                        <li>Self-destructing emails</li>
+                        <li>Custom domain support</li>
+                        <li>Excellent mobile apps</li>
+                    </ul>
+                </div>
+                
+                <div class="cons">
+                    <h3>Cons</h3>
+                    <ul class="feature-list">
+                        <li>Limited storage in free plan</li>
+                        <li>Cannot import existing emails easily</li>
+                        <li>Some features require paid plan</li>
+                        <li>Learning curve for encryption features</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="content-card" style="text-align: center; margin-top: 3rem;">
+                <h3>Ready for Private Email?</h3>
+                <p style="margin-bottom: 2rem;">Switch to Proton Mail today and take control of your email privacy with the most secure email service available.</p>
+                <a href="https://go.getproton.me/aff_c?offer_id=7&aff_id=15997" class="cta-button" target="_blank" rel="noopener noreferrer">Get Proton Mail Now</a>
+                <p style="font-size: 0.8rem; color: var(--text-muted); margin-top: 1rem;">* Affiliate link. We may earn a commission.</p>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 Private Lives Matter. All rights reserved.</p>
+            <p style="margin-top: 0.5rem; font-size: 0.9rem; color: var(--text-muted);">
+                Built to defend digital freedom and human rights.
+            </p>
+            <div style="margin-top: 1rem;">
+                <a href="/privacy-policy" style="color: var(--text-muted); text-decoration: none; margin: 0 10px;">Privacy Policy</a>
+                <a href="/cookie-policy" style="color: var(--text-muted); text-decoration: none; margin: 0 10px;">Cookie Policy</a>
+                <a href="/affiliate-disclosure" style="color: var(--text-muted); text-decoration: none; margin: 0 10px;">Affiliate Disclosure</a>
+                <a href="/about" style="color: var(--text-muted); text-decoration: none; margin: 0 10px;">About Us</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="/#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href').split('#')[1];
+                const targetElement = document.getElementById(targetId);
+                if (targetElement) {
+                    window.location.href = '/' + this.getAttribute('href');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
